@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Message Details</title>
+    </head>
+    <body>
+        <h1>Message Details</h1>
+        <ul>
+            <li>
+                <strong><%= message.user %>:</strong> <%= message.text %>
+                <em>(<%= message.added.toLocaleString() %>)</em>
+            </li>
+        </ul>
+        <a href="/">Back to Messageboard</a>
+    </body>
+</html>
