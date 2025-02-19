@@ -9,8 +9,8 @@
         <h1>Message Details</h1>
         <ul>
             <li>
-                <strong><%= message.user %>:</strong> <%= message.text %>
-                <em>(<%= message.added.toLocaleString() %>)</em>
+                <strong><%= message.username %>:</strong> <%= message.content %>
+                <em>(<%= new Date(message.timestamp).toLocaleString() %>)</em>
             </li>
         </ul>
         <a href="/">Back to Messageboard</a>

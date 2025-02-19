@@ -10,10 +10,10 @@
         <ul>
             <% messages.forEach(function(message) { %>
             <li>
-                <strong><%= message.user %>:</strong> <%= message.text %>
-                <em>(<%= message.added.toLocaleString() %>)</em>
+                <strong><%= message.username %>:</strong> <%= message.content %>
+                <em>(<%= new Date(message.timestamp).toLocaleString() %>)</em>
                 <a href="/<%=message.id%>"
-                    ><button id="<%=message.id%>">Open</button></a
+                    ><button id="<%= message.id %>">Open</button></a
                 >
             </li>
             <% }) %>

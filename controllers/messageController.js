@@ -1,45 +1,35 @@
 // controllers/messagesController.js
-const messages = [
-    {
-        text: "Hi there!",
-        user: "Amando",
-        added: new Date(),
-        id: 0,
-    },
-    {
-        text: "Hello World!",
-        user: "Charles",
-        added: new Date(),
-        id: 1,
-    },
-];
+const db = require("../db/queries");
 
-exports.getMessages = (req, res) => {
+async function getMessages(req, res) {
+    const messages = await db.getAllMessages();
     res.render("index", { title: "Mini Messageboard", messages: messages });
-};
+}
 
-exports.getMessagePage = (req, res) => {
+async function getMessagePage(req, res) {
     const messageId = req.params.id; // 使用 req.params.id 來獲取訊息 ID
-    const message = messages.find((msg) => msg.id === parseInt(messageId));
+    const message = await db.getMessage(messageId);
     if (message) {
         res.render("message", { message: message });
     } else {
         res.status(404).send("Message not found");
     }
-};
+}
 
-exports.newMessage = (req, res) => {
+function newMessage(req, res) {
     res.render("new");
-};
+}
 
-exports.addMessage = (req, res) => {
-    const messageText = req.body.message;
-    const messageUser = req.body.user;
-    messages.push({
-        text: messageText,
-        user: messageUser,
-        added: new Date(),
-        id: messages.length,
-    });
+async function addMessage(req, res) {
+    const messageContent = req.body.content;
+    const messageUsername = req.body.username;
+    await db.insertMessage(messageUsername, messageContent);
     res.redirect("/");
+}
+
+module.exports = {
+    getMessages,
+    getMessagePage,
+    newMessage,
+    addMessage,
 };
